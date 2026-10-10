@@ -13,6 +13,9 @@
                 "F_CPU=1000000UL"
             ],
             "compilerPath": "/usr/bin/avr-gcc",
+            "compilerArgs": [
+                "-mmcu=attiny85"
+            ],
             "cStandard": "c11",
             "intelliSenseMode": "gcc-x64"
         }

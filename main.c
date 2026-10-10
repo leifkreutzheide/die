@@ -1,6 +1,3 @@
-
-#define F_CPU 1000000UL
-
 #include "setup.h"
 #include "functions.h"
 
@@ -25,6 +22,7 @@
 
 int main(void) {
 
+    assignRegisterValues();
 
     while (1)
     {
