@@ -5,7 +5,7 @@ void assignRegisterValues(){
     DDRB    = 0b00000111;                   // PB0, PB1, PB2 as output (all other dont care or floating input)
     PORTB   = 0b00001000;                   // activate pull-up resistor for button on PB3
     PRR     = 0b00001010;                   // power saving measures
-    ADCSRA  = 0b10000110;                   // enable ADC, prescaler = 64 @ 15,625Hz
+    ADCSRA  = 0b00000110;                   //  prescaler = 64 @ 15,625Hz
         
     GIMSK |= (1 << PCIE);                   // set pin change interrupt enable
     PCMSK |= (1 << PCINT3);                 // set pin change interrupt for PB3 (button)

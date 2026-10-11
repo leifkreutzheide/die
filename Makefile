@@ -1,3 +1,4 @@
+
 MCU     = attiny85
 F_CPU   = 1000000UL
 CC      = avr-gcc
