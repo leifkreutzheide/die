@@ -51,8 +51,40 @@ Under power the microcontroller is permanetly in a power-down sleep mode **UNTIL
 4. ADC is disabled
 5. run a function to light up 1-6 LEDs depending on what seed is given
 
-### Debounce design
+### Debounce design (with $t_{bounce} = 20 \text{ms}$)
 
+
+![](images/circuit(3).png)
+*chosen debounce circuit*
+
+When the button is not pressed, the output is HIGH (Vcc). When pressed the capacitor discharges over R2.
+
+From the datasheet: 
+- the highest values at which PB3 is guaranteed to read low is 0.33V
+- the lowest values at which PB3 is guaranteed to read HIGH is 2.3V
+
+In practice this means the pin will probably read 0 below 2.3V and definitely read 0 below 0.33V. 
+
+Formally this means that $$U_c(20 \text{ms}) = 2.3\text{V} = 3.3 \text{V} \cdot e^{- \frac{20 \text{ms}}{R_2 \cdot C}}$$
+must hold true. Selecting $\text{C} = 100 \text{nF}$ we get $$ R_2 = -\frac{20 \text{ms}}{100\text{nF}\cdot \text{ln}(\frac{2.3}{3.3})} \approx 555\text{k} \Omega. $$
+With a leakage of $1\mu\text{A}$ this would result in a non-negligible voltage difference over $R_1 + R_2$. If we select $C= 10 \mu F$ we get $R_2 = 5.5k \Omega$, much better.   
+
+ 
+# Testing the button without debouncing hardware
+
+## Firm button press -> 260ms
+![](images/260ms_press.jpeg)
+
+## Normal button press -> 130ms
+![](images/130ms_press.jpeg)
+
+## quick(ish) button press press -> 75ms
+![](images/75ms_press.jpeg) 
+
+## 5ms button press achieved only after multiple attempts with finger-nail-sliding-off technique
+![](images/5ms_2msDIV_bounceOnReturn.jpeg)
+
+As can be seen in these test, the button I chose does not bounce. How fortunate I am. Let this be a lesson in "test **then** parameterise". A singular rebound can be seen on button release in the last image. If it occurs within 20ms then it wont register. 
 
 ### Regulator design
 
