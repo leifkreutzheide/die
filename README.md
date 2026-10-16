@@ -51,7 +51,7 @@ Under power the microcontroller is permanetly in a power-down sleep mode **UNTIL
 4. ADC is disabled
 5. run a function to light up 1-6 LEDs depending on what seed is given
 
-### Debounce design (with $t_{bounce} = 20 \text{ms}$)
+## Debounce design (with (assumed) $t_{bounce} = 20 \text{ms}$)
 
 
 ![](images/circuit(3).png)
@@ -70,25 +70,60 @@ must hold true. Selecting $\text{C} = 100 \text{nF}$ we get $$ R_2 = -\frac{20 \
 With a leakage of $1\mu\text{A}$ this would result in a non-negligible voltage difference over $R_1 + R_2$. If we select $C= 10 \mu F$ we get $R_2 = 5.5k \Omega$, much better.   
 
  
-# Testing the button without debouncing hardware
+## Testing the button without debouncing hardware
 
-## Firm button press -> 260ms
+### Firm button press -> 260ms
 ![](images/260ms_press.jpeg)
 
-## Normal button press -> 130ms
+### Normal button press -> 130ms
 ![](images/130ms_press.jpeg)
 
-## quick(ish) button press press -> 75ms
+### quick(ish) button press press -> 75ms
 ![](images/75ms_press.jpeg) 
 
-## 5ms button press achieved only after multiple attempts with finger-nail-sliding-off technique
+### 5ms button press achieved only after multiple attempts with finger-nail-sliding-off technique
 ![](images/5ms_2msDIV_bounceOnReturn.jpeg)
 
 As can be seen in these test, the button I chose does not bounce. How fortunate I am. Let this be a lesson in "test **then** parameterise". A singular rebound can be seen on button release in the last image. If it occurs within 20ms then it wont register. 
 
-### Regulator design
+## TPS7A49 Positive Linear Regulator
+
+quick backround on the IC. After reading the datasheet the design essentially boils down to correctly selecting the two resistors and making sure that:
+- The PowerPAD is tied directly to GND
+- Low ESR X7R or X5R ceramic capacitors (preferably 10 $\mu F$) 
+- EN is tied to IN ($V_{in} > V_{EN}$ was given)
+- NR/SS is not resistively or inductively loaded. 
+
+The datasheet specified that, for no-load conditions, 
+
+$$\frac{V_{ref(max)}}{R_2} > 5\mu A$$
+
+ must hold true. This means that $R_2$ must be smalle than $242\text{k}\Omega$. Selecting 
 
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+d
