@@ -66,6 +66,7 @@ From the datasheet:
 In practice this means the pin will probably read 0 below 2.3V and definitely read 0 below 0.33V. 
 
 Formally this means that 
+
 $$
 U_c(20 \text{ms}) = 2.3\text{V} = 3.3 \text{V} \cdot e^{- \frac{20 \text{ms}}{R_2 \cdot C}}
 $$
@@ -75,6 +76,7 @@ must hold trueeee. Selecting $\text{C} = 100 \text{nF}$ we get
 $$
 R_2 = -\frac{20 \text{ms}}{100\text{nF}\cdot \text{ln}(\frac{2.3}{3.3})} \approx 555\text{k} \Omega. 
 $$
+
 With a leakage of $1\mu\text{A}$ this would result in a non-negligible voltage difference over $R_1 + R_2$. If we select $C= 10 \mu F$ we get $R_2 = 5.5k \Omega$, much better.   
 
  
