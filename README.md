@@ -1,4 +1,4 @@
-# Pseudo-random electronic die with a linear voltage regulator and hardware debouncing
+# ATtiny85 pseudo-random electronic die with a linear voltage regulator and hardware debouncing
 
 Contents:
 1. Schematic
