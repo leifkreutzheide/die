@@ -53,8 +53,8 @@ Under power the microcontroller is permanetly in a power-down sleep mode **UNTIL
 
 ## Debounce design (with (assumed) $t_{bounce} = 20 \text{ms}$)
 
+ <img src="images/circuit(3).png" alt="Alt Text" width="400" height="200">
 
-![](images/circuit(3).png)
 *chosen debounce circuit*
 
 When the button is not pressed, the output is HIGH (Vcc). When pressed the capacitor discharges over R2.
@@ -73,18 +73,26 @@ With a leakage of $1\mu\text{A}$ this would result in a non-negligible voltage d
 ## Testing the button without debouncing hardware
 
 ### Firm button press -> 260ms
-![](images/260ms_press.jpeg)
+
+
+ <img src="images/260ms_press.jpeg" alt="Alt Text" width="600" height="350">
+
 
 ### Normal button press -> 130ms
-![](images/130ms_press.jpeg)
+
+ <img src="images/130ms_press.jpeg" alt="Alt Text" width="600" height="350">
 
 ### quick(ish) button press press -> 75ms
-![](images/75ms_press.jpeg) 
+
+
+<img src="images/75ms_press.jpeg" alt="Alt Text" width="600" height="350">
 
 ### 5ms button press achieved only after multiple attempts with finger-nail-sliding-off technique
-![](images/5ms_2msDIV_bounceOnReturn.jpeg)
 
-As can be seen in these test, the button I chose does not bounce. How fortunate I am. Let this be a lesson in "test **then** parameterise". A singular rebound can be seen on button release in the last image. If it occurs within 20ms then it wont register. 
+
+<img src="images/5ms_2msDIV_bounceOnReturn.jpeg" alt="Alt Text" width="600" height="350">
+
+As can be seen in these test, the button I chose does not bounce. How fortunate I am. Let this be a lesson in "test **then** parameterise". A singular rebound can be seen on button release in the last image, this is a non-issue, as if it occurs within 20ms then it will not even register. 
 
 ## TPS7A49 Positive Linear Regulator
 
@@ -98,32 +106,26 @@ The datasheet specified that, for no-load conditions,
 
 $$\frac{V_{ref(max)}}{R_2} > 5\mu A$$
 
- must hold true. This means that $R_2$ must be smalle than $242\text{k}\Omega$. Selecting 
+ must hold true. This means that $R_2$ must be smalle than $242\text{k}\Omega$. Selecting $R_2 = 110\text{k}\Omega$ gives us
+
+ $$R_1 = R_2(\frac{V_{out}}{V_{FB(NOM)}}-1) \approx 200 \text{k}\Omega$$
+
+ for $R_2$. With all that I soldered the TPS7A49 onto a breadoutboard, my SMD capacitors between pins and tested it.  
+
+ ### It works
+
+
+ <img src="images/overall_pic.jpeg" alt="Alt Text" width="500" height="600">
+
+ ### IC/Breadboard closeup
 
 
 
+ <img src="images/IC_on_breadboard.jpeg" alt="Alt Text" width="400" height="600">
 
 
+ ### PowerPAD tied to GND
+ 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-d
+<img src="images/powerPAD_GND.jpeg" alt="Alt Text" width="300" height="300">
